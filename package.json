@@ -1,0 +1,59 @@
+{
+  "name": "llm-schema-compat",
+  "version": "0.1.0",
+  "description": "Make any JSON Schema (Zod, Pydantic, MCP tools, OpenAPI) work with OpenAI strict mode, Anthropic structured outputs and Gemini, and decode the model's output back to your original shape. Zero dependencies.",
+  "keywords": [
+    "json-schema",
+    "openai",
+    "structured-outputs",
+    "strict-mode",
+    "anthropic",
+    "claude",
+    "gemini",
+    "function-calling",
+    "tool-calling",
+    "mcp",
+    "zod",
+    "llm"
+  ],
+  "license": "MIT",
+  "author": "Aman Jha",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amanjhacodes55/llm-schema-compat.git"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean --target es2020",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test test/",
+    "prepublishOnly": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "zod": "^4.6.7"
+  }
+}

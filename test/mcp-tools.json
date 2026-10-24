@@ -1,0 +1,715 @@
+{
+ "everything/echo": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "message": {
+    "type": "string",
+    "description": "Message to echo"
+   }
+  },
+  "required": [
+   "message"
+  ]
+ },
+ "everything/get-annotated-message": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "messageType": {
+    "type": "string",
+    "enum": [
+     "error",
+     "success",
+     "debug"
+    ],
+    "description": "Type of message to demonstrate different annotation patterns"
+   },
+   "includeImage": {
+    "default": false,
+    "description": "Whether to include an example image",
+    "type": "boolean"
+   }
+  },
+  "required": [
+   "messageType"
+  ]
+ },
+ "everything/get-env": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {}
+ },
+ "everything/get-resource-links": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "count": {
+    "default": 3,
+    "description": "Number of resource links to return (1-10)",
+    "type": "number",
+    "minimum": 1,
+    "maximum": 10
+   }
+  }
+ },
+ "everything/get-resource-reference": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "resourceType": {
+    "default": "Text",
+    "type": "string",
+    "enum": [
+     "Text",
+     "Blob"
+    ]
+   },
+   "resourceId": {
+    "default": 1,
+    "description": "ID of the text resource to fetch",
+    "type": "number"
+   }
+  }
+ },
+ "everything/get-structured-content": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "location": {
+    "type": "string",
+    "enum": [
+     "New York",
+     "Chicago",
+     "Los Angeles"
+    ],
+    "description": "Choose city"
+   }
+  },
+  "required": [
+   "location"
+  ]
+ },
+ "everything/get-sum": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "a": {
+    "type": "number",
+    "description": "First number"
+   },
+   "b": {
+    "type": "number",
+    "description": "Second number"
+   }
+  },
+  "required": [
+   "a",
+   "b"
+  ]
+ },
+ "everything/get-tiny-image": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {}
+ },
+ "everything/gzip-file-as-resource": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "name": {
+    "default": "README.md.gz",
+    "type": "string",
+    "description": "Name of the output file"
+   },
+   "data": {
+    "default": "https://raw.githubusercontent.com/modelcontextprotocol/servers/refs/heads/main/README.md",
+    "type": "string",
+    "format": "uri",
+    "description": "URL or data URI of the file content to compress"
+   },
+   "outputType": {
+    "default": "resourceLink",
+    "description": "How the resulting gzipped file should be returned. 'resourceLink' returns a link to a resource that can be read later, 'resource' returns a full resource object.",
+    "type": "string",
+    "enum": [
+     "resourceLink",
+     "resource"
+    ]
+   }
+  }
+ },
+ "everything/toggle-simulated-logging": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {}
+ },
+ "everything/toggle-subscriber-updates": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {}
+ },
+ "everything/trigger-long-running-operation": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "duration": {
+    "default": 10,
+    "description": "Duration of the operation in seconds",
+    "type": "number"
+   },
+   "steps": {
+    "default": 5,
+    "description": "Number of steps in the operation",
+    "type": "number"
+   }
+  }
+ },
+ "everything/simulate-research-query": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "topic": {
+    "type": "string",
+    "description": "The research topic to investigate"
+   },
+   "ambiguous": {
+    "default": false,
+    "description": "Simulate an ambiguous query that requires clarification (triggers input_required status)",
+    "type": "boolean"
+   }
+  },
+  "required": [
+   "topic"
+  ]
+ },
+ "filesystem/read_file": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "tail": {
+    "description": "If provided, returns only the last N lines of the file",
+    "type": "number"
+   },
+   "head": {
+    "description": "If provided, returns only the first N lines of the file",
+    "type": "number"
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/read_text_file": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "tail": {
+    "description": "If provided, returns only the last N lines of the file",
+    "type": "number"
+   },
+   "head": {
+    "description": "If provided, returns only the first N lines of the file",
+    "type": "number"
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/read_media_file": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/read_multiple_files": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "paths": {
+    "minItems": 1,
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "description": "Array of file paths to read. Each path must be a string pointing to a valid file within allowed directories."
+   }
+  },
+  "required": [
+   "paths"
+  ]
+ },
+ "filesystem/write_file": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "content": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "path",
+   "content"
+  ]
+ },
+ "filesystem/edit_file": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "edits": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "oldText": {
+       "type": "string",
+       "description": "Text to search for - must match exactly"
+      },
+      "newText": {
+       "type": "string",
+       "description": "Text to replace with"
+      }
+     },
+     "required": [
+      "oldText",
+      "newText"
+     ]
+    }
+   },
+   "dryRun": {
+    "default": false,
+    "description": "Preview changes using git-style diff format",
+    "type": "boolean"
+   }
+  },
+  "required": [
+   "path",
+   "edits"
+  ]
+ },
+ "filesystem/create_directory": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/list_directory": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/list_directory_with_sizes": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "sortBy": {
+    "default": "name",
+    "description": "Sort entries by name or size",
+    "type": "string",
+    "enum": [
+     "name",
+     "size"
+    ]
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/directory_tree": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "excludePatterns": {
+    "default": [],
+    "type": "array",
+    "items": {
+     "type": "string"
+    }
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/move_file": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "source": {
+    "type": "string"
+   },
+   "destination": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "source",
+   "destination"
+  ]
+ },
+ "filesystem/search_files": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   },
+   "pattern": {
+    "type": "string"
+   },
+   "excludePatterns": {
+    "default": [],
+    "type": "array",
+    "items": {
+     "type": "string"
+    }
+   }
+  },
+  "required": [
+   "path",
+   "pattern"
+  ]
+ },
+ "filesystem/get_file_info": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+   "path": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "path"
+  ]
+ },
+ "filesystem/list_allowed_directories": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {}
+ },
+ "memory/create_entities": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "entities": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "name": {
+       "type": "string",
+       "description": "The name of the entity"
+      },
+      "entityType": {
+       "type": "string",
+       "description": "The type of the entity"
+      },
+      "observations": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "description": "An array of observation contents associated with the entity"
+      }
+     },
+     "required": [
+      "name",
+      "entityType",
+      "observations"
+     ]
+    }
+   }
+  },
+  "required": [
+   "entities"
+  ]
+ },
+ "memory/create_relations": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "relations": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "from": {
+       "type": "string",
+       "description": "The name of the entity where the relation starts"
+      },
+      "to": {
+       "type": "string",
+       "description": "The name of the entity where the relation ends"
+      },
+      "relationType": {
+       "type": "string",
+       "description": "The type of the relation"
+      }
+     },
+     "required": [
+      "from",
+      "to",
+      "relationType"
+     ]
+    }
+   }
+  },
+  "required": [
+   "relations"
+  ]
+ },
+ "memory/add_observations": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "observations": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "entityName": {
+       "type": "string",
+       "description": "The name of the entity to add the observations to"
+      },
+      "contents": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "description": "An array of observation contents to add"
+      }
+     },
+     "required": [
+      "entityName",
+      "contents"
+     ]
+    }
+   }
+  },
+  "required": [
+   "observations"
+  ]
+ },
+ "memory/delete_entities": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "entityNames": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "description": "An array of entity names to delete"
+   }
+  },
+  "required": [
+   "entityNames"
+  ]
+ },
+ "memory/delete_observations": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "deletions": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "entityName": {
+       "type": "string",
+       "description": "The name of the entity containing the observations"
+      },
+      "observations": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "description": "An array of observations to delete"
+      }
+     },
+     "required": [
+      "entityName",
+      "observations"
+     ]
+    }
+   }
+  },
+  "required": [
+   "deletions"
+  ]
+ },
+ "memory/delete_relations": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "relations": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "from": {
+       "type": "string",
+       "description": "The name of the entity where the relation starts"
+      },
+      "to": {
+       "type": "string",
+       "description": "The name of the entity where the relation ends"
+      },
+      "relationType": {
+       "type": "string",
+       "description": "The type of the relation"
+      }
+     },
+     "required": [
+      "from",
+      "to",
+      "relationType"
+     ]
+    },
+    "description": "An array of relations to delete"
+   }
+  },
+  "required": [
+   "relations"
+  ]
+ },
+ "memory/read_graph": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {}
+ },
+ "memory/search_nodes": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "query": {
+    "type": "string",
+    "maxLength": 2048,
+    "description": "The search query to match against entity names, types, and observation content"
+   }
+  },
+  "required": [
+   "query"
+  ]
+ },
+ "memory/open_nodes": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "names": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "description": "An array of entity names to retrieve"
+   }
+  },
+  "required": [
+   "names"
+  ]
+ },
+ "thinking/sequentialthinking": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+   "thought": {
+    "type": "string",
+    "description": "Your current thinking step"
+   },
+   "nextThoughtNeeded": {
+    "description": "Whether another thought step is needed",
+    "type": [
+     "boolean",
+     "string"
+    ]
+   },
+   "thoughtNumber": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 9007199254740991,
+    "description": "Current thought number (numeric value, e.g., 1, 2, 3)"
+   },
+   "totalThoughts": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 9007199254740991,
+    "description": "Estimated total thoughts needed (numeric value, e.g., 5, 10)"
+   },
+   "isRevision": {
+    "description": "Whether this revises previous thinking",
+    "type": [
+     "boolean",
+     "string"
+    ]
+   },
+   "revisesThought": {
+    "description": "Which thought is being reconsidered",
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 9007199254740991
+   },
+   "branchFromThought": {
+    "description": "Branching point thought number",
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 9007199254740991
+   },
+   "branchId": {
+    "description": "Branch identifier",
+    "type": "string"
+   },
+   "needsMoreThoughts": {
+    "description": "If more thoughts are needed",
+    "type": [
+     "boolean",
+     "string"
+    ]
+   }
+  },
+  "required": [
+   "thought",
+   "nextThoughtNeeded",
+   "thoughtNumber",
+   "totalThoughts"
+  ]
+ }
+}
